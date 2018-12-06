@@ -1,0 +1,37 @@
+{
+  "name": "what-to-watch-",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server-dev": "nodemon server/index.js",
+    "react-dev": "webpack -d --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dderojas/What-To-Watch-.git"
+  },
+  "author": "Don de Rojas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dderojas/What-To-Watch-/issues"
+  },
+  "homepage": "https://github.com/dderojas/What-To-Watch-#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "pg": "^7.6.0",
+    "pg-hstore": "^2.3.2",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "sequelize": "^4.39.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "webpack": "^2.2.1"
+  }
+}
