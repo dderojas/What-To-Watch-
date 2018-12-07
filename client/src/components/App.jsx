@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import MovieList from './MovieList.jsx';
 import axios from 'axios';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      input:""
+      year:'',
+      genre:'',
+      results:[]
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,16 +26,22 @@ export default class App extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
-    axios.get('/test'+ this.state.input)
+    var year = this.state.year;
+    var genre = this.state.genre;
+    axios.get(`/movies?year=${year}&genre=${genre}`)
     .then((res) => {
-      console.log('went to server');
+      console.log('went to server',res);
+      this.setState({
+        results: res.data.rows[0]
+      });
     })
     .catch((err) => {
       console.log('failed',err);
     });
 
     this.setState({
-      input:''
+      year:'',
+      genre:''
     });
   }
 
@@ -40,8 +49,12 @@ export default class App extends React.Component {
     return(
       <div>
         <h1>IMDB</h1>
-        <input name="input" type="text" value={this.state.input} onChange={this.handleChange}></input>
-        <button onClick={this.handleClick}>Get Title</button>
+        <input name="year" type="number" placeholder="Year" value={this.state.year} onChange={this.handleChange}></input>
+        <input name="genre" type="text" placeholder="Genre" value={this.state.genre} onChange={this.handleChange}></input>
+        <button onClick={this.handleClick}>Get Those Movies!</button>
+        <div>{this.state.results.map((movies) => {
+          return <MovieList movie={movies}/>
+        })}</div>
       </div>
     )
   }
