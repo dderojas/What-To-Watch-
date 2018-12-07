@@ -31,35 +31,27 @@ const dbURI = 'postgres://nicolas_cage:The Declaration of Independence@db.calsur
 
 const db = new pg.Client(dbURI);
 
-db.connect();
+db.connect()
+.then((data) => {
+  console.log(data,'database connected!');
+})
+.catch((err) => {
+  console.log(err,'bad stuff');
+})
+
+var query = {
+  text:'SELECT originaltitle FROM titles WHERE tconst=$1',
+  values:['tt0000001']
+}
 
 db.getTitles = () => {
-  console.log('in titles');
-  db.query('', (err, res) => {
-    if(err) {
-      console.log('bad',err);
-    } else {
-      console.log('hey',res);
-    }
-  });
+  db.query(query)
+  .then((data) => {
+    console.log(data,'good data');
+  })
+  .catch((err) => {
+    console.log(err,'bad data');
+  })
 }
 
 module.exports = db;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

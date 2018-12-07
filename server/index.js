@@ -13,18 +13,8 @@ console.log('hey');
 
 });
 
-
-// console.log(db.getTitles());
-
 app.listen(3000, function() {
-  console.log('server connected');
+  console.log(db.getTitles(),'server connected');
 });
 
 module.exports = app;
-
-
-// db.sync({force: true}).then(() => {
-//   app.listen(3000, function() {
-//     console.log(db.sequelize,'server connected');
-//   });
-// });
