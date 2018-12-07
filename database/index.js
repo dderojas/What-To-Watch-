@@ -8,14 +8,14 @@ db.connect()
   console.log(data,'database connected!');
 })
 .catch((err) => {
-  console.log(err,'bad stuff');
+  console.log(err,'did not connect');
 })
 
 db.getTitles = (query,res) => {
   db.query(query)
   .then((data) => {
     console.log(data,'good data');
-    // res.status(200).json(data);
+    res.status(200).json(data);
   })
   .catch((err) => {
     console.log(err,'bad data');

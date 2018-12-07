@@ -30,13 +30,13 @@ export default class App extends React.Component {
     var genre = this.state.genre;
     axios.get(`/movies?year=${year}&genre=${genre}`)
     .then((res) => {
-      console.log('went to server',res);
+      console.log('request success',res);
       this.setState({
         results: res.data.rows[0]
       });
     })
     .catch((err) => {
-      console.log('failed',err);
+      console.log('request failed',err);
     });
 
     this.setState({
