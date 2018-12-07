@@ -13,7 +13,9 @@ export default class App extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleGenreYearClick = this.handleGenreYearClick.bind(this);
+    this.handleYearClick = this.handleYearClick.bind(this);
+    this.handleGenreClick = this.handleGenreClick.bind(this);
   }
 
   handleChange(e)  {
@@ -24,11 +26,51 @@ export default class App extends React.Component {
     });
   }
 
-  handleClick(e) {
+  handleGenreYearClick(e) {
     e.preventDefault();
     var year = this.state.year;
     var genre = this.state.genre;
     axios.get(`/movies?year=${year}&genre=${genre}`)
+    .then((res) => {
+      console.log('request success',res);
+      this.setState({
+        results: res.data.rows[0]
+      });
+    })
+    .catch((err) => {
+      console.log('request failed',err);
+    });
+
+    this.setState({
+      year:'',
+      genre:''
+    });
+  }
+
+  handleYearClick(e) {
+    e.preventDefault();
+    var year = this.state.year;
+    axios.get(`/movies/year?year=${year}`)
+    .then((res) => {
+      console.log('request success',res);
+      this.setState({
+        results: res.data.rows[0]
+      });
+    })
+    .catch((err) => {
+      console.log('request failed',err);
+    });
+
+    this.setState({
+      year:'',
+      genre:''
+    });
+  }
+
+  handleGenreClick(e) {
+    e.preventDefault();
+    var genre = this.state.genre;
+    axios.get(`/movies/genre?genre=${genre}`)
     .then((res) => {
       console.log('request success',res);
       this.setState({
@@ -51,7 +93,9 @@ export default class App extends React.Component {
         <h1>IMDB</h1>
         <input name="year" type="number" placeholder="Year" value={this.state.year} onChange={this.handleChange}></input>
         <input name="genre" type="text" placeholder="Genre" value={this.state.genre} onChange={this.handleChange}></input>
-        <button onClick={this.handleClick}>Get Those Movies!</button>
+        <button onClick={this.handleGenreYearClick}>Get Those Movies!</button>
+        <button onClick={this.handleGenreClick}>Get Those Movie by Genre!</button>
+        <button onClick={this.handleYearClick}>Get Those Movies by Year!</button>
         <div>{this.state.results.map((movies) => {
           return <MovieList movie={movies}/>
         })}</div>
