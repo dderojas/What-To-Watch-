@@ -15,7 +15,7 @@ db.getTitles = (query,res) => {
   db.query(query)
   .then((data) => {
     console.log(data,'valid search');
-    // res.status(200).json(data);
+    res.status(200).json(data);
   })
   .catch((err) => {
     console.log(err,'invalid search');

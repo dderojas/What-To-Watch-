@@ -9,7 +9,7 @@ export default class App extends React.Component {
     this.state = {
       year:'',
       genre:'',
-      results:[]
+      results:['oneMovie']
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -34,7 +34,7 @@ export default class App extends React.Component {
     .then((res) => {
       console.log('request success',res);
       this.setState({
-        results: res.data.rows[0]
+        results: res.data.rows
       });
     })
     .catch((err) => {
@@ -54,7 +54,7 @@ export default class App extends React.Component {
     .then((res) => {
       console.log('request success',res);
       this.setState({
-        results: res.data.rows[0]
+        results: res.data.rows
       });
     })
     .catch((err) => {
@@ -74,7 +74,7 @@ export default class App extends React.Component {
     .then((res) => {
       console.log('request success',res);
       this.setState({
-        results: res.data.rows[0]
+        results: res.data.rows
       });
     })
     .catch((err) => {
@@ -97,7 +97,7 @@ export default class App extends React.Component {
         <button onClick={this.handleGenreClick}>Get Those Movie by Genre!</button>
         <button onClick={this.handleYearClick}>Get Those Movies by Year!</button>
         <div>{this.state.results.map((movies) => {
-          return <MovieList movie={movies}/>
+          return <MovieList movie={movies.primarytitle}/>
         })}</div>
       </div>
     )
