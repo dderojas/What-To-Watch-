@@ -11,7 +11,7 @@ app.get('/movies', (req,res) => {
   console.log('movies!',req.query);
 
   var query = {
-    text:'SELECT primarytitle FROM titles WHERE genres=$1 AND startyear=$2 LIMIT 25',
+    text:'SELECT primarytitle,tconst FROM titles WHERE genres=$1 AND startyear=$2 LIMIT 25',
     values:[req.query.genre, req.query.year]
   }
 
@@ -44,6 +44,17 @@ app.get('/movies/genre', (req,res) => {
   }
 
   db.getTitles(query,res);
+});
+
+app.get('/movies/sorted', (req,res) => {
+
+  var query = {
+    text:'SELECT primarytitle,tconst FROM titles WHERE genres=$1 AND startyear=$2 LIMIT 25',
+    values:[req.query.genre, req.query.year]
+  }
+
+  db.getSortedTitles(query,res);
+
 });
 
 app.listen(3000, function() {

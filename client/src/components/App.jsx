@@ -9,13 +9,14 @@ export default class App extends React.Component {
     this.state = {
       year:'',
       genre:'',
-      results:['oneMovie']
+      results:['one movie']
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleGenreYearClick = this.handleGenreYearClick.bind(this);
     this.handleYearClick = this.handleYearClick.bind(this);
     this.handleGenreClick = this.handleGenreClick.bind(this);
+    this.handleGenreYearSorted = this.handleGenreYearSorted.bind(this);
   }
 
   handleChange(e)  {
@@ -87,6 +88,27 @@ export default class App extends React.Component {
     });
   }
 
+  handleGenreYearSorted(e) {
+    e.preventDefault();
+    var year = this.state.year;
+    var genre = this.state.genre;
+    axios.get(`/movies/sorted?year=${year}&genre=${genre}`)
+    .then((res) => {
+      console.log('request success',res);
+      this.setState({
+        results: res.data.rows
+      });
+    })
+    .catch((err) => {
+      console.log('request failed',err);
+    });
+
+    this.setState({
+      year:'',
+      genre:''
+    });
+  }
+
   render() {
     return(
       <div>
@@ -96,6 +118,7 @@ export default class App extends React.Component {
         <button onClick={this.handleGenreYearClick}>Get Those Movies!</button>
         <button onClick={this.handleGenreClick}>Get Those Movie by Genre!</button>
         <button onClick={this.handleYearClick}>Get Those Movies by Year!</button>
+        <button onClick={this.handleGenreYearSorted}>Best to Worst Movies!</button>
         <div>{this.state.results.map((movies) => {
           return <MovieList movie={movies.primarytitle}/>
         })}</div>
