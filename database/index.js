@@ -1,5 +1,6 @@
 const pg = require('pg');
-const dbURI = 'postgres://nicolas_cage:The Declaration of Independence@db.calsurv.org:5432/coding_challenge?ssl=true';
+const password = require('../config.js');
+const dbURI = `postgres://nicolas_cage:${password.databasePassword}@db.calsurv.org:5432/coding_challenge?ssl=true`;
 
 const db = new pg.Client(dbURI);
 
