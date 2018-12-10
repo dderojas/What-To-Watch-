@@ -1,6 +1,6 @@
 const pg = require('pg');
-const password = require('../config.js');
-const dbURI = `postgres://nicolas_cage:${password.databasePassword}@db.calsurv.org:5432/coding_challenge?ssl=true`;
+const config = require('../config.js');
+const dbURI = config.dbURI;
 
 const db = new pg.Client(dbURI);
 
@@ -30,7 +30,7 @@ function sortByRatings(item1, item2) {
   };
   db.query(query)
   .then((data) => {
-    console.log(data, 'valid ratings request');
+    console.log(data,'valid ratings request');
     return data.rows[1].averagerating - data.rows[0].averagerating;
   })
   .catch((err) => {

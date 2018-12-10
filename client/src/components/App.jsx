@@ -9,7 +9,7 @@ export default class App extends React.Component {
     this.state = {
       year:'',
       genre:'',
-      results:['one movie']
+      results:[]
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -96,7 +96,7 @@ export default class App extends React.Component {
     .then((res) => {
       console.log('request success',res);
       this.setState({
-        results: res.data.rows
+        results: this.state.results.concat(res.data.rows)
       });
     })
     .catch((err) => {
