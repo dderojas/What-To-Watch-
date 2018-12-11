@@ -47,16 +47,16 @@ app.get('/movies/genre', (req,res) => {
   db.getTitles(query,res);
 });
 
-app.get('/movies/sorted', (req,res) => {
+// app.get('/movies/sorted', (req,res) => {
 
-  var query = {
-    text:'SELECT primarytitle,tconst FROM titles WHERE genres=$1 AND startyear=$2 LIMIT 25',
-    values:[req.query.genre, req.query.year]
-  }
+//   var query = {
+//     text:'SELECT primarytitle,tconst FROM titles WHERE genres=$1 AND startyear=$2 LIMIT 25',
+//     values:[req.query.genre, req.query.year]
+//   }
 
-  db.getSortedTitles(query,res);
+//   db.getSortedTitles(query,res);
 
-});
+// });
 
 app.listen(process.env.PORT || 3000, function() {
   console.log('server connected');
