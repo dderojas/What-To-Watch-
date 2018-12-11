@@ -28,8 +28,12 @@ function sortByRatings(item1, item2) {
   };
   db.query(query)
   .then((data) => {
-    console.log(data,'valid ratings request');
-    return data.rows[1].averagerating - data.rows[0].averagerating;
+    console.log(data.rows,'valid ratings request');
+    if(data.rows.length > 1) {
+      return data.rows[1].averagerating - data.rows[0].averagerating;
+    } else {
+      return 0 - data.rows[0].averagerating;
+    }
   })
   .catch((err) => {
     console.log(err, 'invalid ratings request');

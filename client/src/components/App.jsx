@@ -94,9 +94,9 @@ export default class App extends React.Component {
     var genre = this.state.genre;
     axios.get(`/movies/sorted?year=${year}&genre=${genre}`)
     .then((res) => {
-      console.log('request success',res);
+      console.log('request success',res.data);
       this.setState({
-        results: this.state.results.concat(res.data.rows)
+        results: this.state.results.concat(res.data)
       });
     })
     .catch((err) => {
