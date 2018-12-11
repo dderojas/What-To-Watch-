@@ -21,30 +21,30 @@ db.getTitles = (query,res) => {
   });
 }
 
-// function sortByRatings(item1, item2) {
-//   var query = {
-//     text:'SELECT averagerating FROM ratings WHERE tconst=$1 OR tconst=$2',
-//     values:[item1.tconst,item2.tconst]
-//   };
-//   db.query(query)
-//   .then((data) => {
-//     console.log(data,'valid ratings request');
-//     return data.rows[1].averagerating - data.rows[0].averagerating;
-//   })
-//   .catch((err) => {
-//     console.log(err, 'invalid ratings request');
-//   })
-// }
+function sortByRatings(item1, item2) {
+  var query = {
+    text:'SELECT averagerating FROM ratings WHERE tconst=$1 OR tconst=$2',
+    values:[item1.tconst,item2.tconst]
+  };
+  db.query(query)
+  .then((data) => {
+    console.log(data,'valid ratings request');
+    return data.rows[1].averagerating - data.rows[0].averagerating;
+  })
+  .catch((err) => {
+    console.log(err, 'invalid ratings request');
+  })
+}
 
-// db.getSortedTitles = (query,res) => {
-//   db.query(query)
-//   .then((data) => {
-//     var results = data.rows.sort(sortByRatings);
-//     res.status(200).json(results);
-//   })
-//   .catch((err) => {
-//     console.log(err,'sorting error');
-//   })
-// }
+db.getSortedTitles = (query,res) => {
+  db.query(query)
+  .then((data) => {
+    var results = data.rows.sort(sortByRatings);
+    res.status(200).json(results);
+  })
+  .catch((err) => {
+    console.log(err,'sorting error');
+  })
+}
 
 module.exports = db;
