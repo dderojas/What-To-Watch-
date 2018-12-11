@@ -1,6 +1,5 @@
 const pg = require('pg');
-const config = require('../config.js');
-const dbURI = config.dbURI;
+const dbURI = process.env.dbURI;
 
 const db = new pg.Client(dbURI);
 
