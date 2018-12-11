@@ -1,15 +1,14 @@
 const pg = require('pg');
 const dbURI = process.env.dbURI;
-
 const db = new pg.Client(dbURI);
 
 db.connect()
 .then((data) => {
-  console.log(data,'database connected!');
+  console.log('database connected!');
 })
 .catch((err) => {
   console.log(err,'did not connect');
-})
+});
 
 db.getTitles = (query,res) => {
   db.query(query)
